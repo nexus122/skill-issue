@@ -26,6 +26,10 @@ All state lives in `chrome.storage.local` under these keys: `settings`, `stats`,
 
 Translations live in `i18n/en.json` and `i18n/es.json`. Default language is Spanish (`es`). All pages fetch the translation file at runtime using `chrome.runtime.getURL`. Add new strings to both files in parallel.
 
+## Mascot
+
+`assets/mascot-idle.svg` and `assets/mascot-alert.svg` are a pixel-art robot (screen-face + ear panels + track base) in two moods — calm (used everywhere by default: popup header, options sidebar, break screen) and angry/alert (used only on `blocked/blocked.html`'s work screen, the moment you get caught). Both are hand-authored 16×16-cell SVGs (7 units/cell) sharing the exact same chassis rects — only the screen interior (rows 4-6: bg, eyes, brow) and the CSS animations differ (calm = slow float + blink + soft cyan light pulse; alert = quick jitter + pulsing red eyes/light). `icons/generate_icons.js`'s `GRID` is a second, independently hand-authored representation of the calm face at 16×16 used only to rasterize the toolbar icons (`node generate_icons.js` regenerates `icon16/32/48/128.png`) — if the mascot design changes, update both representations and keep them visually in sync manually; there's no shared source of truth between the SVGs and the icon grid.
+
 ## Themes & Achievements
 
 Themes (`red`, `matrix`, `void`, `gold`) are applied via `document.body.className = 'theme-{id}'`. The non-default themes are locked behind achievements. Achievement IDs are defined in `background.js` (`ACHIEVEMENTS_DEF`) and their display strings are in the i18n files under `achievements`.

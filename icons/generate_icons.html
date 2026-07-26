@@ -22,7 +22,7 @@
 </head>
 <body>
   <h1>ICON GENERATOR</h1>
-  <p>Pixel art drill-sergeant icons for the Skill Issue Chrome extension.</p>
+  <p>Pixel art robot mascot icons for the Skill Issue Chrome extension.</p>
 
   <div class="canvases">
     <div class="canvas-wrap"><canvas id="c128" width="128" height="128" style="width:128px;height:128px"></canvas><div class="size-label">128×128</div></div>
@@ -42,35 +42,34 @@
   <script>
     // ── 16×16 pixel grid ──────────────────────────────────────────────────────
     // Each character = 1 pixel. '.' = transparent.
+    // Idle/calm state — the toolbar icon always shows the calm face.
     const GRID = [
-      '....BBBBBBBB....', // 0  beret top
-      '...BBBBBBBBBB...', // 1  beret wider
-      '..BBGBBBBBBBBB..', // 2  beret + badge (G)
-      '.DDDDDDDDDDDDDD.', // 3  beret brim
-      '....WWWWWWWW....', // 4  skull top
-      '...WWWWWWWWWW...', // 5  skull upper
-      '..WWWWWWWWWWWW..', // 6  skull wide
-      '..WKKKKKKKKKKW..', // 7  aviators — top rim
-      '..WKKHKKKKKKKW..', // 8  aviators — lens + glint
-      '..WKKKKKKKKKKW..', // 9  aviators — bottom rim
-      '..WWWK.KWWWWW...', // 10 nose holes
-      '...WTWTWTWTWWCR.', // 11 gum + teeth + cigar
-      '....T.T.T.T.....', // 12 teeth bottom
-      '................', // 13
+      '....SSSSSSSS....', // 0  head top
+      '...SSSSSSSSSS...', // 1  head wider
+      '...SSSSSSSSSS...', // 2  forehead
+      '..ESSKKKKKKSSE..', // 3  ears + screen frame top
+      '..ESSPPPPPPSSE..', // 4  ears + screen bg
+      '..ESSPYPPYPSSE..', // 5  ears + eyes
+      '..ESSPPPPPPSSE..', // 6  ears + screen bg
+      '...SSKKKKKKSS...', // 7  screen frame bottom
+      '..DSSSSSSSSSSD..', // 8  shoulders
+      '..DSSSSLLSSSSD..', // 9  chassis + status light
+      '..DSSSSSSSSSSD..', // 10 chassis lower
+      '..EDDDDDDDDDDE..', // 11 wheels top
+      '..EDDDDDDDDDDE..', // 12 wheels bottom
+      '....DDDDDDDD....', // 13 ground shadow
       '................', // 14
       '................', // 15
     ];
 
     const PALETTE = {
-      'B': '#5a7a32', // beret green
-      'D': '#2d3d15', // beret dark / brim
-      'G': '#ffd700', // gold badge
-      'W': '#f0ede0', // skull cream
-      'K': '#111111', // aviator lens / nose
-      'H': '#8a95a3', // lens glint
-      'C': '#5a3f28', // cigar body
-      'R': '#cc0000', // cigar ember
-      'T': '#ffffff', // tooth white
+      'S': '#9aa8b3', // chassis steel
+      'D': '#4a5058', // chassis shadow
+      'E': '#cc0000', // ear panel / wheel
+      'K': '#111111', // screen frame
+      'P': '#bfe6f5', // screen bg (calm)
+      'Y': '#1c3a4a', // eye (calm)
+      'L': '#2ee6c8', // status light
     };
 
     function drawIcon(canvas) {

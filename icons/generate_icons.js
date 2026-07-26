@@ -7,36 +7,36 @@ const path = require('path');
 const zlib = require('zlib');
 
 // ── 16×16 pixel grid ─────────────────────────────────────────────────────────
+// Idle/calm state — the toolbar icon always shows the calm face.
+// See assets/mascot-idle.svg / mascot-alert.svg for the animated, stateful versions.
 const GRID = [
-  '....BBBBBBBB....', // 0  beret top
-  '...BBBBBBBBBB...', // 1  beret wider
-  '..BBGBBBBBBBBB..', // 2  beret + badge
-  '.DDDDDDDDDDDDDD.', // 3  beret brim
-  '....WWWWWWWW....', // 4  skull top
-  '...WWWWWWWWWW...', // 5  skull upper
-  '..WWWWWWWWWWWW..', // 6  skull wide
-  '..WKKKKKKKKKKW..', // 7  aviators — top rim
-  '..WKKHKKKKKKKW..', // 8  aviators — lens + glint
-  '..WKKKKKKKKKKW..', // 9  aviators — bottom rim
-  '..WWWK.KWWWWW...', // 10 nose holes
-  '...WTWTWTWTWWCR.', // 11 gum + teeth + cigar
-  '....T.T.T.T.....', // 12 teeth bottom
-  '................', // 13
+  '....SSSSSSSS....', // 0  head top
+  '...SSSSSSSSSS...', // 1  head wider
+  '...SSSSSSSSSS...', // 2  forehead
+  '..ESSKKKKKKSSE..', // 3  ears + screen frame top
+  '..ESSPPPPPPSSE..', // 4  ears + screen bg
+  '..ESSPYPPYPSSE..', // 5  ears + eyes
+  '..ESSPPPPPPSSE..', // 6  ears + screen bg
+  '...SSKKKKKKSS...', // 7  screen frame bottom
+  '..DSSSSSSSSSSD..', // 8  shoulders
+  '..DSSSSLLSSSSD..', // 9  chassis + status light
+  '..DSSSSSSSSSSD..', // 10 chassis lower
+  '..EDDDDDDDDDDE..', // 11 wheels top
+  '..EDDDDDDDDDDE..', // 12 wheels bottom
+  '....DDDDDDDD....', // 13 ground shadow
   '................', // 14
   '................', // 15
 ];
 
 // RGBA values per palette character ('.' = transparent)
 const PALETTE = {
-  'B': [0x5a, 0x7a, 0x32, 0xff],
-  'D': [0x2d, 0x3d, 0x15, 0xff],
-  'G': [0xff, 0xd7, 0x00, 0xff],
-  'W': [0xf0, 0xed, 0xe0, 0xff],
+  'S': [0x9a, 0xa8, 0xb3, 0xff],
+  'D': [0x4a, 0x50, 0x58, 0xff],
+  'E': [0xcc, 0x00, 0x00, 0xff],
   'K': [0x11, 0x11, 0x11, 0xff],
-  'H': [0x8a, 0x95, 0xa3, 0xff],
-  'C': [0x5a, 0x3f, 0x28, 0xff],
-  'R': [0xcc, 0x00, 0x00, 0xff],
-  'T': [0xff, 0xff, 0xff, 0xff],
+  'P': [0xbf, 0xe6, 0xf5, 0xff],
+  'Y': [0x1c, 0x3a, 0x4a, 0xff],
+  'L': [0x2e, 0xe6, 0xc8, 0xff],
   '.': [0x00, 0x00, 0x00, 0x00],
 };
 
