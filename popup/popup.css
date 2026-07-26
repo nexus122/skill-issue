@@ -52,8 +52,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px 10px;
-  border-bottom: 1px solid var(--border);
+  padding: 12px 14px 8px;
   background: var(--surface);
 }
 
@@ -85,11 +84,59 @@ body {
   line-height: 1.3;
 }
 
+/* ── Ambient stats (quiet readout, no boxes) ────────────────────── */
+.ambient-stats {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 5px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.ambient-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.ambient-icon {
+  font-size: 10px;
+  opacity: 0.7;
+  filter: grayscale(1);
+}
+
 /* ── Timer ──────────────────────────────────────────────────────── */
 .timer-section {
   text-align: center;
-  padding: 18px 14px 14px;
-  border-bottom: 1px solid var(--border);
+  padding: 16px 14px;
+}
+
+.timer-screen {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 10px;
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.8);
+}
+
+.timer-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.025) 2px,
+    rgba(255, 255, 255, 0.025) 3px
+  );
 }
 
 .timer-state-label {
@@ -200,57 +247,37 @@ body {
   border-color: var(--danger);
 }
 
-/* ── Stats bar ──────────────────────────────────────────────────── */
-.stats-bar {
+/* ── Task list (collapsed by default) ───────────────────────────── */
+.tasks-section {
+  border-bottom: 1px solid var(--border);
+}
+
+.tasks-toggle {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 6px;
   padding: 8px 14px;
-  border-bottom: 1px solid var(--border);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.tasks-toggle:hover {
   background: var(--surface);
 }
 
-.stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-}
-
-.stat-value {
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--accent);
-  line-height: 1;
-}
-
-.stat-label {
+.tasks-chevron {
   font-size: 9px;
   color: var(--text-muted);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  transition: transform 0.15s;
 }
 
-.stat-divider {
-  width: 1px;
-  height: 24px;
-  background: var(--border);
-}
-
-/* ── Task list ──────────────────────────────────────────────────── */
-.tasks-section {
-  padding: 8px 14px;
-  border-bottom: 1px solid var(--border);
-  max-height: 160px;
-  overflow-y: auto;
-}
-
-.tasks-section::-webkit-scrollbar { width: 3px; }
-.tasks-section::-webkit-scrollbar-track { background: transparent; }
-.tasks-section::-webkit-scrollbar-thumb { background: var(--border); }
-
-.tasks-header {
-  margin-bottom: 6px;
+.tasks-section.expanded .tasks-chevron {
+  transform: rotate(90deg);
 }
 
 .tasks-title {
@@ -258,6 +285,35 @@ body {
   letter-spacing: 3px;
   color: var(--text-muted);
 }
+
+.tasks-count {
+  margin-left: auto;
+  font-size: 9px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1px 5px;
+}
+
+.tasks-section.expanded .tasks-count {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tasks-body {
+  display: none;
+  padding: 0 14px 10px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.tasks-section.expanded .tasks-body {
+  display: block;
+}
+
+.tasks-body::-webkit-scrollbar { width: 3px; }
+.tasks-body::-webkit-scrollbar-track { background: transparent; }
+.tasks-body::-webkit-scrollbar-thumb { background: var(--border); }
 
 .task-list {
   list-style: none;

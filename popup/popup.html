@@ -16,11 +16,20 @@
     </div>
   </div>
 
+  <!-- Ambient stats readout — quiet, single line, no borders -->
+  <div class="ambient-stats" id="ambientStats" aria-label="stats">
+    <span class="ambient-stat" id="labelStreak"><span class="ambient-icon">🔥</span><span id="statStreak">0</span></span>
+    <span class="ambient-stat" id="labelToday"><span class="ambient-icon">☀</span><span id="statToday">0</span></span>
+    <span class="ambient-stat" id="labelEscapes"><span class="ambient-icon">⚠</span><span id="statEscapes">0</span></span>
+  </div>
+
   <!-- Timer -->
   <div class="timer-section">
-    <div class="timer-state-label" id="timerStateLabel">IDLE</div>
-    <div class="timer-display" id="timerDisplay">25:00</div>
-    <div class="timer-task" id="timerTask"></div>
+    <div class="timer-screen">
+      <div class="timer-state-label" id="timerStateLabel">IDLE</div>
+      <div class="timer-display" id="timerDisplay">25:00</div>
+      <div class="timer-task" id="timerTask"></div>
+    </div>
   </div>
 
   <!-- Task input (visible when idle) -->
@@ -48,33 +57,19 @@
     <button class="btn btn-danger" id="stopBtn" style="display:none">ABORT</button>
   </div>
 
-  <!-- Stats bar -->
-  <div class="stats-bar">
-    <div class="stat">
-      <span class="stat-value" id="statStreak">0</span>
-      <span class="stat-label" id="labelStreak">streak</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <span class="stat-value" id="statToday">0</span>
-      <span class="stat-label" id="labelToday">today</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <span class="stat-value" id="statEscapes">0</span>
-      <span class="stat-label" id="labelEscapes">escapes</span>
-    </div>
-  </div>
-
-  <!-- Task list -->
+  <!-- Task list (collapsed by default — tap to expand) -->
   <div class="tasks-section">
-    <div class="tasks-header">
+    <button class="tasks-toggle" id="tasksToggle">
+      <span class="tasks-chevron" id="tasksChevron">▸</span>
       <span class="tasks-title" id="tasksTitle">TASKS</span>
-    </div>
-    <ul class="task-list" id="taskList"></ul>
-    <div class="task-add-wrap">
-      <input type="text" class="task-add-input" id="taskAddInput" maxlength="80">
-      <button class="task-add-btn" id="taskAddBtn" aria-label="Add task">+</button>
+      <span class="tasks-count" id="tasksCount">0</span>
+    </button>
+    <div class="tasks-body" id="tasksBody">
+      <ul class="task-list" id="taskList"></ul>
+      <div class="task-add-wrap">
+        <input type="text" class="task-add-input" id="taskAddInput" maxlength="80">
+        <button class="task-add-btn" id="taskAddBtn" aria-label="Add task">+</button>
+      </div>
     </div>
   </div>
 

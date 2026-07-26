@@ -16,7 +16,7 @@ All state lives in `chrome.storage.local` under these keys: `settings`, `stats`,
 
 **`offscreen.js`** — hidden offscreen document (via `chrome.offscreen`), the only place an MV3 service worker can play audio. `background.js` calls `playChime('work' | 'break')` on session/break completion; it lazily creates the offscreen document and messages it `PLAY_CHIME`. The chime is synthesized with the Web Audio API (two-tone oscillator), no audio asset needed.
 
-**`popup/popup.js`** — reads storage and polls every second to render the timer. Sends messages to background for user actions.
+**`popup/popup.js`** — reads storage and polls every second to render the timer. Sends messages to background for user actions. Visual hierarchy: the timer lives inside a `.timer-screen` bezel (the one framed/signature element on the page); streak/today/escapes render as a quiet single-line `.ambient-stats` readout under the header instead of a boxed stat bar; the task checklist is collapsed by default behind a `.tasks-toggle` disclosure (`.tasks-section.expanded` reveals `.tasks-body`) so the idle view stays timer-first.
 
 **`blocked/blocked.js`** — shown when a blocked site is visited (via `declarativeNetRequest` redirect). Counts escape attempts, shows countdown, handles both work and break states.
 

@@ -13,9 +13,9 @@ async function loadI18n() {
 
 function applyI18n() {
   document.getElementById('appTitle').textContent         = t.popup.title;
-  document.getElementById('labelStreak').textContent      = t.popup.streak;
-  document.getElementById('labelToday').textContent       = t.popup.today;
-  document.getElementById('labelEscapes').textContent     = t.popup.escapes;
+  document.getElementById('labelStreak').title            = t.popup.streak;
+  document.getElementById('labelToday').title             = t.popup.today;
+  document.getElementById('labelEscapes').title            = t.popup.escapes;
   document.getElementById('tasksTitle').textContent       = t.popup.tasksTitle;
   document.getElementById('taskInput').placeholder        = t.popup.taskPlaceholder;
   document.getElementById('taskAddInput').placeholder     = t.popup.addTaskPlaceholder;
@@ -152,6 +152,8 @@ async function renderTasks() {
   const { tasks } = await getActiveTasks();
   const list = document.getElementById('taskList');
   list.innerHTML = '';
+
+  document.getElementById('tasksCount').textContent = (tasks || []).length;
 
   (tasks || []).forEach((task) => {
     const li = document.createElement('li');
@@ -454,6 +456,10 @@ function bindEvents() {
 
   document.getElementById('historyBtn').addEventListener('click', showHistory);
   document.getElementById('historyBack').addEventListener('click', hideHistory);
+
+  document.getElementById('tasksToggle').addEventListener('click', () => {
+    document.querySelector('.tasks-section').classList.toggle('expanded');
+  });
 
   document.getElementById('carryOverYes').addEventListener('click', doCarryOver);
   document.getElementById('carryOverNo').addEventListener('click', dismissCarryOver);
