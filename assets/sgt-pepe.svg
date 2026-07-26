@@ -5,27 +5,10 @@
     50%       { transform: translateY(-3px); }
   }
 
-  /* Single keyframe handles both glow cycle and blink */
-  @keyframes eye-r {
-    0%   { fill: #cc0000; }
-    35%  { fill: #7a0000; }
-    70%  { fill: #cc0000; }
-    84%  { fill: #cc0000; }
-    86%  { fill: #111111; }
-    91%  { fill: #111111; }
-    93%  { fill: #cc0000; }
-    100% { fill: #cc0000; }
-  }
-
-  @keyframes eye-h {
-    0%   { fill: #ff4444; }
-    35%  { fill: #992222; }
-    70%  { fill: #ff4444; }
-    84%  { fill: #ff4444; }
-    86%  { fill: #111111; }
-    91%  { fill: #111111; }
-    93%  { fill: #ff4444; }
-    100% { fill: #ff4444; }
+  /* Cigar ember: pulses like it's being drawn on */
+  @keyframes ember {
+    0%, 100% { fill: #cc0000; }
+    50%      { fill: #ff6a33; }
   }
 
   @keyframes badge {
@@ -35,14 +18,14 @@
   }
 
   .body  { animation: float 3s ease-in-out infinite; }
-  .eye-r { animation: eye-r 5s ease-in-out infinite; }
-  .eye-h { animation: eye-h 5s ease-in-out infinite; }
+  .ember { animation: ember 2.5s ease-in-out infinite; }
   .badge { animation: badge 4s ease-in-out infinite; }
 </style>
 
 <!--
-  Pixel art skull  ·  14×14 grid  ·  pixel = 7 units  ·  offset (1,1)
+  Pixel art drill-sergeant skull  ·  14×14 grid  ·  pixel = 7 units  ·  offset (1,1)
   x(col) = 1 + col*7    y(row) = 1 + row*7
+  Aviators replace the eye sockets; a cigar juts off the right side of the jaw.
 -->
 <g class="body">
 
@@ -70,33 +53,16 @@
   <rect x="8"  y="43" width="77" height="7" fill="#f0ede0"/>
   <rect x="85" y="43" width="7"  height="7" fill="#c8c4b0"/>
 
-  <!-- ── row 7 (y=50)  eye sockets top ── -->
-  <rect x="8"  y="50" width="7"  height="7" fill="#f0ede0"/>
-  <rect x="15" y="50" width="21" height="7" fill="#111111"/>
-  <rect x="36" y="50" width="21" height="7" fill="#f0ede0"/>
-  <rect x="57" y="50" width="21" height="7" fill="#111111"/>
-  <rect x="78" y="50" width="7"  height="7" fill="#f0ede0"/>
-  <rect x="85" y="50" width="7"  height="7" fill="#c8c4b0"/>
+  <!-- ── row 7 (y=50)  aviators — top rim, full width ── -->
+  <rect x="8"  y="50" width="84" height="7" fill="#111111"/>
 
-  <!-- ── row 8 (y=57)  red eyes ── -->
-  <rect x="8"  y="57" width="7"  height="7" fill="#f0ede0"/>
-  <rect x="15" y="57" width="7"  height="7" fill="#111111"/>
-  <rect x="22" y="57" width="7"  height="7" class="eye-h" fill="#ff4444"/>
-  <rect x="29" y="57" width="7"  height="7" class="eye-r" fill="#cc0000"/>
-  <rect x="36" y="57" width="21" height="7" fill="#f0ede0"/>
-  <rect x="57" y="57" width="7"  height="7" fill="#111111"/>
-  <rect x="64" y="57" width="7"  height="7" class="eye-h" fill="#ff4444"/>
-  <rect x="71" y="57" width="7"  height="7" class="eye-r" fill="#cc0000"/>
-  <rect x="78" y="57" width="7"  height="7" fill="#f0ede0"/>
-  <rect x="85" y="57" width="7"  height="7" fill="#c8c4b0"/>
+  <!-- ── row 8 (y=57)  aviators — lens band + glint ── -->
+  <rect x="8"  y="57" width="14" height="7" fill="#111111"/>
+  <rect x="22" y="57" width="7"  height="7" fill="#8a95a3"/>
+  <rect x="29" y="57" width="63" height="7" fill="#111111"/>
 
-  <!-- ── row 9 (y=64)  eye sockets bottom ── -->
-  <rect x="8"  y="64" width="7"  height="7" fill="#f0ede0"/>
-  <rect x="15" y="64" width="21" height="7" fill="#111111"/>
-  <rect x="36" y="64" width="21" height="7" fill="#f0ede0"/>
-  <rect x="57" y="64" width="21" height="7" fill="#111111"/>
-  <rect x="78" y="64" width="7"  height="7" fill="#f0ede0"/>
-  <rect x="85" y="64" width="7"  height="7" fill="#c8c4b0"/>
+  <!-- ── row 9 (y=64)  aviators — bottom rim, full width ── -->
+  <rect x="8"  y="64" width="84" height="7" fill="#111111"/>
 
   <!-- ── row 10 (y=71)  nose holes ── -->
   <rect x="15" y="71" width="21" height="7" fill="#f0ede0"/>
@@ -104,7 +70,7 @@
   <rect x="50" y="71" width="7"  height="7" fill="#111111"/>
   <rect x="57" y="71" width="21" height="7" fill="#f0ede0"/>
 
-  <!-- ── row 11 (y=78)  gum + teeth ── -->
+  <!-- ── row 11 (y=78)  gritted teeth + cigar ── -->
   <rect x="22" y="78" width="7"  height="7" fill="#f0ede0"/>
   <rect x="29" y="78" width="7"  height="7" fill="#ffffff"/>
   <rect x="36" y="78" width="7"  height="7" fill="#f0ede0"/>
@@ -114,6 +80,8 @@
   <rect x="64" y="78" width="7"  height="7" fill="#f0ede0"/>
   <rect x="71" y="78" width="7"  height="7" fill="#ffffff"/>
   <rect x="78" y="78" width="7"  height="7" fill="#f0ede0"/>
+  <rect x="85" y="78" width="7"  height="7" fill="#5a3f28"/>
+  <rect x="92" y="78" width="7"  height="7" class="ember" fill="#cc0000"/>
 
   <!-- ── row 12 (y=85)  teeth bottom ── -->
   <rect x="29" y="85" width="7"  height="7" fill="#ffffff"/>

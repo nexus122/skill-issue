@@ -15,11 +15,11 @@ const GRID = [
   '....WWWWWWWW....', // 4  skull top
   '...WWWWWWWWWW...', // 5  skull upper
   '..WWWWWWWWWWWW..', // 6  skull wide
-  '..WKKKWWWKKKWW..', // 7  eye sockets top
-  '..WKrRWWWKrRWW..', // 8  red eyes
-  '..WKKKWWWKKKWW..', // 9  eye sockets bottom
+  '..WKKKKKKKKKKW..', // 7  aviators — top rim
+  '..WKKHKKKKKKKW..', // 8  aviators — lens + glint
+  '..WKKKKKKKKKKW..', // 9  aviators — bottom rim
   '..WWWK.KWWWWW...', // 10 nose holes
-  '...WTWTWTWTWW...', // 11 gum + teeth
+  '...WTWTWTWTWWCR.', // 11 gum + teeth + cigar
   '....T.T.T.T.....', // 12 teeth bottom
   '................', // 13
   '................', // 14
@@ -33,7 +33,8 @@ const PALETTE = {
   'G': [0xff, 0xd7, 0x00, 0xff],
   'W': [0xf0, 0xed, 0xe0, 0xff],
   'K': [0x11, 0x11, 0x11, 0xff],
-  'r': [0xff, 0x44, 0x44, 0xff],
+  'H': [0x8a, 0x95, 0xa3, 0xff],
+  'C': [0x5a, 0x3f, 0x28, 0xff],
   'R': [0xcc, 0x00, 0x00, 0xff],
   'T': [0xff, 0xff, 0xff, 0xff],
   '.': [0x00, 0x00, 0x00, 0x00],
