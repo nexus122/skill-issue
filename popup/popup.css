@@ -60,7 +60,7 @@ body {
   width: 38px;
   height: 38px;
   flex-shrink: 0;
-  image-rendering: pixelated;
+  border-radius: var(--radius);
 }
 
 .header-info {

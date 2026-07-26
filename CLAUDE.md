@@ -28,7 +28,16 @@ Translations live in `i18n/en.json` and `i18n/es.json`. Default language is Span
 
 ## Mascot
 
-`assets/mascot-idle.svg` and `assets/mascot-alert.svg` are a pixel-art robot (screen-face + ear panels + track base) in two moods — calm (used everywhere by default: popup header, options sidebar, break screen) and angry/alert (used only on `blocked/blocked.html`'s work screen, the moment you get caught). Both are hand-authored 16×16-cell SVGs (7 units/cell) sharing the exact same chassis rects — only the screen interior (rows 4-6: bg, eyes, brow) and the CSS animations differ (calm = slow float + blink + soft cyan light pulse; alert = quick jitter + pulsing red eyes/light). `icons/generate_icons.js`'s `GRID` is a second, independently hand-authored representation of the calm face at 16×16 used only to rasterize the toolbar icons (`node generate_icons.js` regenerates `icon16/32/48/128.png`) — if the mascot design changes, update both representations and keep them visually in sync manually; there's no shared source of truth between the SVGs and the icon grid.
+`assets/mascot-{idle,angry,sad,effort,victory}.png` are a pixel-art robot mascot (screen-face + ear panels + track base) commissioned as reference art (Google Stitch) and downscaled 1024→300px with `ffmpeg` (`scale=300:300:flags=lanczos`) — these are the source of truth, not hand-authored SVG. Background is opaque dark navy (~`#171522`), which is why `.avatar`/`.pepe` don't need `image-rendering: pixelated` — the browser's normal smoothing is what we want here.
+
+Mood → surface mapping:
+- **idle** — default everywhere: popup header (`avatarImg`), options sidebar logo.
+- **effort** — popup header while `timer.state === 'work'` (see `setAvatar()` in `popup.js`).
+- **sad** — popup header, flashed for 2.5s after `STOP` if the aborted session was `work` (`flashAvatar('sad', 2500)`).
+- **victory** — popup header, flashed for 3s on achievement unlock; also the permanent mascot on `blocked/blocked.html`'s break screen.
+- **angry** — permanent mascot on `blocked/blocked.html`'s work screen (the "you got caught" moment).
+
+Toolbar icons (`icons/icon16/32/48/128.png`) are the `idle` image rescaled with the same `ffmpeg` command — regenerate them the same way if the idle art changes. There is no pixel-grid generator anymore (removed); if `assets/mascot-idle.png` changes, re-run the ffmpeg scale command for each icon size.
 
 ## Themes & Achievements
 

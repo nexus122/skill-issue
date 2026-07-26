@@ -1,6 +1,24 @@
 let t = {};
 let tickInterval = null;
 
+// ─── Avatar mood ──────────────────────────────────────────────────────────────
+
+let avatarMood = null;
+let avatarOverrideUntil = 0;
+let avatarOverrideMood = null;
+
+function setAvatar(mood) {
+  if (mood === avatarMood) return;
+  avatarMood = mood;
+  document.getElementById('avatarImg').src = `../assets/mascot-${mood}.png`;
+}
+
+function flashAvatar(mood, ms) {
+  avatarOverrideMood  = mood;
+  avatarOverrideUntil = Date.now() + ms;
+  setAvatar(mood);
+}
+
 // ─── i18n ─────────────────────────────────────────────────────────────────────
 
 async function loadI18n() {
@@ -51,6 +69,13 @@ async function updateUI() {
 
   // Apply theme
   document.body.className = `theme-${settings.theme || 'red'}`;
+
+  // Avatar mood — a transient flash (e.g. sad after aborting) wins until it expires
+  if (Date.now() < avatarOverrideUntil) {
+    setAvatar(avatarOverrideMood);
+  } else {
+    setAvatar(state === 'work' ? 'effort' : 'idle');
+  }
 
   // Timer display
   const timerEl    = document.getElementById('timerDisplay');
@@ -397,6 +422,7 @@ async function showAchievementToast(id) {
 
   toastText.textContent = achData.name;
   toast.style.display   = 'flex';
+  flashAvatar('victory', 3000);
 
   setTimeout(() => { toast.style.display = 'none'; }, 3000);
 }
@@ -416,12 +442,16 @@ function bindEvents() {
     }, 100);
   });
 
-  document.getElementById('stopBtn').addEventListener('click', () => {
+  document.getElementById('stopBtn').addEventListener('click', async () => {
+    const { timer } = await chrome.storage.local.get(['timer']);
+    const wasWork = timer?.state === 'work';
+
     chrome.runtime.sendMessage({ type: 'STOP' });
     setTimeout(async () => {
       await updateUI();
       await renderTasks();
       await checkCarryOver();
+      if (wasWork) flashAvatar('sad', 2500);
     }, 150);
   });
 
