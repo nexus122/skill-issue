@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Icons — Skill Issue</title>
+  <style>
+    body { background: #0d0d0d; color: #f0f0f0; font-family: monospace; padding: 40px; }
+    h1   { color: #cc0000; letter-spacing: 4px; margin-bottom: 8px; }
+    p    { color: #666; margin-bottom: 24px; font-size: 13px; }
+    .canvases { display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 28px; }
+    .canvas-wrap { text-align: center; }
+    canvas { display: block; image-rendering: pixelated; border: 1px solid #2a2a2a; }
+    .size-label { font-size: 11px; color: #555; margin-top: 6px; letter-spacing: 1px; }
+    button {
+      background: #cc0000; color: #fff; border: none; font-family: monospace;
+      font-size: 12px; letter-spacing: 2px; padding: 10px 24px; cursor: pointer;
+    }
+    button:hover { background: #ff2020; }
+    .instructions { margin-top: 24px; font-size: 12px; color: #555; line-height: 1.8; }
+    .instructions b { color: #cc0000; }
+  </style>
+</head>
+<body>
+  <h1>ICON GENERATOR</h1>
+  <p>Pixel art skull icons for the Skill Issue Chrome extension.</p>
+
+  <div class="canvases">
+    <div class="canvas-wrap"><canvas id="c128" width="128" height="128" style="width:128px;height:128px"></canvas><div class="size-label">128×128</div></div>
+    <div class="canvas-wrap"><canvas id="c48"  width="48"  height="48"  style="width:96px;height:96px"></canvas><div class="size-label">48×48</div></div>
+    <div class="canvas-wrap"><canvas id="c32"  width="32"  height="32"  style="width:64px;height:64px"></canvas><div class="size-label">32×32</div></div>
+    <div class="canvas-wrap"><canvas id="c16"  width="16"  height="16"  style="width:64px;height:64px"></canvas><div class="size-label">16×16</div></div>
+  </div>
+
+  <button id="downloadBtn">DOWNLOAD ALL ICONS</button>
+
+  <div class="instructions">
+    1. Click <b>DOWNLOAD ALL ICONS</b><br>
+    2. Move each file to the <b>icons/</b> folder, replacing the old ones<br>
+    3. Reload the extension in <b>chrome://extensions</b>
+  </div>
+
+  <script>
+    // ── 16×16 pixel grid ──────────────────────────────────────────────────────
+    // Each character = 1 pixel. '.' = transparent.
+    const GRID = [
+      '....BBBBBBBB....', // 0  beret top
+      '...BBBBBBBBBB...', // 1  beret wider
+      '..BBGBBBBBBBBB..', // 2  beret + badge (G)
+      '.DDDDDDDDDDDDDD.', // 3  beret brim
+      '....WWWWWWWW....', // 4  skull top
+      '...WWWWWWWWWW...', // 5  skull upper
+      '..WWWWWWWWWWWW..', // 6  skull wide
+      '..WKKKWWWKKKWW..', // 7  eye sockets top
+      '..WKrRWWWKrRWW..', // 8  red eyes
+      '..WKKKWWWKKKWW..', // 9  eye sockets bottom
+      '..WWWK.KWWWWW...', // 10 nose holes
+      '...WTWTWTWTWW...', // 11 gum + teeth
+      '....T.T.T.T.....', // 12 teeth bottom
+      '................', // 13
+      '................', // 14
+      '................', // 15
+    ];
+
+    const PALETTE = {
+      'B': '#5a7a32', // beret green
+      'D': '#2d3d15', // beret dark / brim
+      'G': '#ffd700', // gold badge
+      'W': '#f0ede0', // skull cream
+      'K': '#111111', // eye socket / nose
+      'r': '#ff4444', // eye highlight
+      'R': '#cc0000', // eye red
+      'T': '#ffffff', // tooth white
+    };
+
+    function drawIcon(canvas) {
+      const size  = canvas.width;
+      const scale = size / 16;          // integer for all 4 sizes (1, 2, 3, 8)
+      const ctx   = canvas.getContext('2d');
+
+      ctx.clearRect(0, 0, size, size);  // transparent background
+
+      GRID.forEach((row, r) => {
+        [...row].forEach((ch, c) => {
+          const color = PALETTE[ch];
+          if (!color) return;
+          ctx.fillStyle = color;
+          ctx.fillRect(
+            Math.round(c * scale),
+            Math.round(r * scale),
+            Math.round(scale),
+            Math.round(scale)
+          );
+        });
+      });
+    }
+
+    const sizes = [128, 48, 32, 16];
+    sizes.forEach(s => drawIcon(document.getElementById(`c${s}`)));
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      sizes.forEach((s, i) => {
+        setTimeout(() => {
+          const canvas = document.getElementById(`c${s}`);
+          const a = document.createElement('a');
+          a.download = `icon${s}.png`;
+          a.href = canvas.toDataURL('image/png');
+          a.click();
+        }, i * 200); // stagger downloads so browser doesn't block them
+      });
+    });
+  </script>
+</body>
+</html>

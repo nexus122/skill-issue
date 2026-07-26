@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body id="app" class="theme-red">
+
+  <!-- Header -->
+  <div class="header">
+    <img src="../assets/sgt-pepe.svg" class="avatar" alt="Sgt. Pepe" id="avatarImg">
+    <div class="header-info">
+      <span class="app-title" id="appTitle">SKILL ISSUE</span>
+      <span class="app-status" id="appStatus">...</span>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div class="timer-section">
+    <div class="timer-state-label" id="timerStateLabel">IDLE</div>
+    <div class="timer-display" id="timerDisplay">25:00</div>
+    <div class="timer-task" id="timerTask"></div>
+  </div>
+
+  <!-- Task input (visible when idle) -->
+  <div class="task-input-wrap" id="taskInputWrap">
+    <input
+      type="text"
+      id="taskInput"
+      maxlength="60"
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- Carry-over banner (visible when idle + incomplete tasks from last session) -->
+  <div class="carry-over-banner" id="carryOverBanner" style="display:none">
+    <span class="carry-over-msg" id="carryOverMsg"></span>
+    <div class="carry-over-actions">
+      <button class="carry-over-btn" id="carryOverYes"></button>
+      <button class="carry-over-btn carry-over-skip" id="carryOverNo"></button>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="btn btn-primary" id="primaryBtn">START</button>
+    <button class="btn btn-danger" id="stopBtn" style="display:none">ABORT</button>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-value" id="statStreak">0</span>
+      <span class="stat-label" id="labelStreak">streak</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-value" id="statToday">0</span>
+      <span class="stat-label" id="labelToday">today</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-value" id="statEscapes">0</span>
+      <span class="stat-label" id="labelEscapes">escapes</span>
+    </div>
+  </div>
+
+  <!-- Task list -->
+  <div class="tasks-section">
+    <div class="tasks-header">
+      <span class="tasks-title" id="tasksTitle">TASKS</span>
+    </div>
+    <ul class="task-list" id="taskList"></ul>
+    <div class="task-add-wrap">
+      <input type="text" class="task-add-input" id="taskAddInput" maxlength="80">
+      <button class="task-add-btn" id="taskAddBtn" aria-label="Add task">+</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <button class="footer-btn" id="historyBtn">🕐</button>
+    <button class="footer-btn" id="settingsBtn">⚙</button>
+    <button class="footer-btn" id="achievementsBtn">🎖</button>
+  </div>
+
+  <!-- History panel (overlays everything) -->
+  <div class="history-panel" id="historyPanel" style="display:none">
+    <div class="history-header">
+      <button class="history-back" id="historyBack">← <span id="historyBackLabel">VOLVER</span></button>
+      <span class="history-title" id="historyTitle">HISTORIAL</span>
+    </div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+
+  <!-- Achievement toast -->
+  <div class="achievement-toast" id="achievementToast" style="display:none">
+    <span class="achievement-toast-icon">🎖</span>
+    <span class="achievement-toast-text" id="achievementToastText"></span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

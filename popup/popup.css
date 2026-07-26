@@ -1,0 +1,611 @@
+/* ── CSS Variables (themes) ─────────────────────────────────────── */
+:root {
+  --bg:           #0d0d0d;
+  --surface:      #171717;
+  --border:       #2a2a2a;
+  --accent:       #cc0000;
+  --accent-dim:   #8a0000;
+  --accent-glow:  rgba(204, 0, 0, 0.15);
+  --text:         #f0f0f0;
+  --text-muted:   #666;
+  --success:      #2d8c2d;
+  --danger:       #8a0000;
+  --radius:       2px;
+}
+
+.theme-matrix {
+  --accent:       #00cc44;
+  --accent-dim:   #008c2d;
+  --accent-glow:  rgba(0, 204, 68, 0.15);
+}
+
+.theme-void {
+  --bg:           #000000;
+  --surface:      #0a0a0a;
+  --accent:       #ffffff;
+  --accent-dim:   #aaaaaa;
+  --accent-glow:  rgba(255, 255, 255, 0.1);
+  --border:       #1f1f1f;
+}
+
+.theme-gold {
+  --accent:       #ffd700;
+  --accent-dim:   #aa8e00;
+  --accent-glow:  rgba(255, 215, 0, 0.15);
+}
+
+/* ── Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 320px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-title {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.app-status {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+/* ── Timer ──────────────────────────────────────────────────────── */
+.timer-section {
+  text-align: center;
+  padding: 18px 14px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.timer-state-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.timer-state-label.active {
+  color: var(--accent);
+  text-shadow: 0 0 6px var(--accent-glow);
+}
+
+.timer-state-label.break {
+  color: var(--success);
+}
+
+.timer-display {
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: var(--text);
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.timer-display.work  { color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+.timer-display.break { color: var(--success); }
+
+.timer-task {
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+  margin-inline: auto;
+  text-transform: uppercase;
+}
+
+/* ── Task input (idle state) ────────────────────────────────────── */
+.task-input-wrap {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.task-input-wrap input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.task-input-wrap input::placeholder { color: var(--text-muted); }
+.task-input-wrap input:focus { border-color: var(--accent); }
+
+/* ── Controls ───────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.btn {
+  flex: 1;
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.btn-danger:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* ── Stats bar ──────────────────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+/* ── Task list ──────────────────────────────────────────────────── */
+.tasks-section {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.tasks-section::-webkit-scrollbar { width: 3px; }
+.tasks-section::-webkit-scrollbar-track { background: transparent; }
+.tasks-section::-webkit-scrollbar-thumb { background: var(--border); }
+
+.tasks-header {
+  margin-bottom: 6px;
+}
+
+.tasks-title {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 6px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.task-item:hover { background: var(--surface); }
+
+.task-item input[type="checkbox"] {
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-item-text {
+  font-size: 11px;
+  color: var(--text);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-item.done .task-item-text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.task-item-del {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 2px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.1s, color 0.1s;
+  flex-shrink: 0;
+}
+
+.task-item:hover .task-item-del { opacity: 1; }
+.task-item-del:hover { color: var(--accent); }
+
+.task-add-wrap {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.task-add-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 10px;
+  padding: 4px 2px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.task-add-input::placeholder { color: var(--text-muted); }
+.task-add-input:focus { border-color: var(--accent); }
+
+.task-add-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.1s;
+}
+
+.task-add-btn:hover { color: var(--text); }
+
+/* ── Footer ─────────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 6px 10px;
+  background: var(--surface);
+}
+
+.footer-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: var(--radius);
+  transition: color 0.1s, background 0.1s;
+}
+
+.footer-btn:hover {
+  color: var(--text);
+  background: var(--border);
+}
+
+/* ── Carry-over banner ──────────────────────────────────────────── */
+.carry-over-banner {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.carry-over-msg {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.carry-over-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.carry-over-btn {
+  flex: 1;
+  padding: 5px 8px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.carry-over-btn:hover { opacity: 0.8; }
+
+.carry-over-skip {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.carry-over-skip:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  opacity: 1;
+}
+
+/* ── History panel ──────────────────────────────────────────────── */
+.history-panel {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.history-back {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0;
+  transition: color 0.1s;
+}
+
+.history-back:hover { color: var(--text); }
+
+.history-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  flex: 1;
+  text-align: right;
+}
+
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-list::-webkit-scrollbar { width: 3px; }
+.history-list::-webkit-scrollbar-thumb { background: var(--border); }
+
+.history-empty {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-align: center;
+  padding: 24px 0;
+  letter-spacing: 1px;
+}
+
+/* ── Session card ────────────────────────────────────────────────── */
+.session-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.session-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.session-focus {
+  font-size: 11px;
+  color: var(--text);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-focus.no-focus {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: normal;
+}
+
+.session-badge {
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 2px 5px;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.session-badge.done    { color: var(--success); border: 1px solid var(--success); }
+.session-badge.aborted { color: var(--text-muted); border: 1px solid var(--border); }
+
+.session-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+.session-time.full { color: var(--accent); }
+
+.session-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 2px;
+}
+
+.session-incomplete-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.session-reuse-btn {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.session-reuse-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── Achievement toast ──────────────────────────────────────────── */
+.achievement-toast {
+  position: fixed;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 16px var(--accent-glow);
+  animation: toastIn 0.3s ease;
+  white-space: nowrap;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

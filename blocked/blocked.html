@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKILL ISSUE</title>
+  <link rel="stylesheet" href="blocked.css">
+</head>
+<body id="app" class="theme-red">
+
+  <!-- Work mode: blocked screen -->
+  <div id="screenWork" class="screen screen-work">
+    <div class="vignette"></div>
+
+    <div class="content">
+      <img src="../assets/sgt-pepe.svg" class="pepe" alt="Sgt. Pepe" id="pepeImg">
+
+      <h1 class="title" id="blockedTitle">YOU FAILED</h1>
+      <p class="subtitle" id="blockedSubtitle">Skill issue detected</p>
+
+      <p class="phrase" id="shamePhrase"></p>
+
+      <div class="timer-box">
+        <span class="timer-box-label" id="timerLabel">Back to work in</span>
+        <span class="timer-box-time" id="countdown">--:--</span>
+      </div>
+
+      <p class="shame-count" id="shameCount"></p>
+    </div>
+  </div>
+
+  <!-- Break mode: freedom screen -->
+  <div id="screenBreak" class="screen screen-break" style="display:none">
+    <div class="content">
+      <img src="../assets/sgt-pepe.svg" class="pepe pepe-break" alt="Sgt. Pepe">
+
+      <h1 class="title title-break" id="breakTitle">BREAK TIME</h1>
+      <p class="subtitle" id="breakSubtitle">You actually did it. Barely.</p>
+      <p class="phrase" id="breakMessage">5 minutes. Don't waste them.</p>
+
+      <div class="timer-box timer-box-break">
+        <span class="timer-box-time" id="breakCountdown">05:00</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="blocked.js"></script>
+</body>
+</html>

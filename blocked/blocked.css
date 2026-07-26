@@ -1,0 +1,216 @@
+/* ── Themes ──────────────────────────────────────────────────────── */
+:root {
+  --bg:          #050505;
+  --accent:      #cc0000;
+  --accent-dim:  rgba(204, 0, 0, 0.4);
+  --text:        #e0e0e0;
+  --text-muted:  #555;
+  --glow:        rgba(204, 0, 0, 0.25);
+}
+
+.theme-matrix {
+  --accent:     #00cc44;
+  --accent-dim: rgba(0, 204, 68, 0.4);
+  --glow:       rgba(0, 204, 68, 0.25);
+}
+
+.theme-void {
+  --bg:         #000;
+  --accent:     #fff;
+  --accent-dim: rgba(255, 255, 255, 0.4);
+  --glow:       rgba(255, 255, 255, 0.15);
+}
+
+.theme-gold {
+  --accent:     #ffd700;
+  --accent-dim: rgba(255, 215, 0, 0.4);
+  --glow:       rgba(255, 215, 0, 0.25);
+}
+
+/* ── Base ────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Screens ─────────────────────────────────────────────────────── */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Vignette ────────────────────────────────────────────────────── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Content ─────────────────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 640px;
+  width: 100%;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Pepe ────────────────────────────────────────────────────────── */
+.pepe {
+  width: 100px;
+  height: 120px;
+  filter: drop-shadow(0 0 20px var(--glow));
+  animation: pepeShake 0.6s ease;
+}
+
+.pepe-break {
+  filter: drop-shadow(0 0 20px rgba(45, 140, 45, 0.4));
+  animation: pepeBounce 0.8s ease;
+}
+
+@keyframes pepeShake {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-4deg); }
+  40%  { transform: rotate(4deg); }
+  60%  { transform: rotate(-2deg); }
+  80%  { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes pepeBounce {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-12px); }
+  70%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* ── Title ───────────────────────────────────────────────────────── */
+.title {
+  font-size: clamp(48px, 10vw, 96px);
+  font-weight: 900;
+  letter-spacing: 12px;
+  color: var(--accent);
+  text-shadow:
+    0 0 30px var(--glow),
+    0 0 60px var(--glow),
+    2px 2px 0 rgba(0,0,0,0.8);
+  line-height: 1;
+  animation: titleFlicker 3s infinite;
+}
+
+@keyframes titleFlicker {
+  0%, 95%, 100% { opacity: 1; }
+  96%            { opacity: 0.7; }
+  97%            { opacity: 1; }
+  98%            { opacity: 0.8; }
+}
+
+.title-break {
+  color: #2d8c2d;
+  text-shadow:
+    0 0 30px rgba(45, 140, 45, 0.4),
+    2px 2px 0 rgba(0,0,0,0.8);
+  animation: none;
+}
+
+/* ── Subtitle ────────────────────────────────────────────────────── */
+.subtitle {
+  font-size: 14px;
+  letter-spacing: 6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── Shame phrase ────────────────────────────────────────────────── */
+.phrase {
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: var(--text);
+  max-width: 500px;
+  line-height: 1.5;
+  font-style: italic;
+  opacity: 0.85;
+  padding: 0 20px;
+}
+
+/* ── Timer box ───────────────────────────────────────────────────── */
+.timer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 32px;
+  border: 1px solid var(--accent-dim);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 2px;
+}
+
+.timer-box-break {
+  border-color: rgba(45, 140, 45, 0.4);
+}
+
+.timer-box-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.timer-box-time {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  color: var(--text);
+}
+
+/* ── Shame count ─────────────────────────────────────────────────── */
+.shame-count {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+/* ── Scanlines (CRT effect) ──────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 999;
+}

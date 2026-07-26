@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Issue — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body id="app" class="theme-red">
+
+  <div class="page">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../assets/sgt-pepe.svg" alt="Sgt. Pepe" width="40">
+        <span>SKILL ISSUE</span>
+      </div>
+      <ul class="nav-list">
+        <li><a class="nav-link active" data-section="timer"    href="#">⏱ Pomodoro</a></li>
+        <li><a class="nav-link"        data-section="blocklist" href="#">🚫 Block list</a></li>
+        <li><a class="nav-link"        data-section="themes"    href="#">🎨 Themes</a></li>
+        <li><a class="nav-link"        data-section="achievements" href="#">🎖 Achievements</a></li>
+        <li><a class="nav-link"        data-section="general"   href="#">⚙ General</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <!-- Pomodoro -->
+      <section class="section" id="section-timer">
+        <h2 class="section-title" id="titleTimer">POMODORO</h2>
+        <div class="form-row">
+          <label class="form-label" id="labelWork">Work (minutes)</label>
+          <input type="number" id="workDuration" class="form-input" min="1" max="120" value="25">
+        </div>
+        <div class="form-row">
+          <label class="form-label" id="labelBreak">Break (minutes)</label>
+          <input type="number" id="breakDuration" class="form-input" min="1" max="60" value="5">
+        </div>
+      </section>
+
+      <!-- Blocklist -->
+      <section class="section hidden" id="section-blocklist">
+        <h2 class="section-title" id="titleBlocklist">BLOCKED SITES</h2>
+
+        <div class="preset-chips" id="presetChips"></div>
+
+        <div class="blocklist-add">
+          <input type="text" id="blocklistInput" class="form-input" placeholder="domain.com">
+          <button class="btn btn-accent" id="blocklistAddBtn">ADD</button>
+        </div>
+
+        <ul class="blocklist" id="blocklistItems"></ul>
+      </section>
+
+      <!-- Themes -->
+      <section class="section hidden" id="section-themes">
+        <h2 class="section-title" id="titleThemes">THEME</h2>
+        <div class="theme-grid" id="themeGrid"></div>
+      </section>
+
+      <!-- Achievements -->
+      <section class="section hidden" id="section-achievements">
+        <h2 class="section-title" id="titleAchievements">ACHIEVEMENTS</h2>
+        <div class="achievements-grid" id="achievementsGrid"></div>
+      </section>
+
+      <!-- General -->
+      <section class="section hidden" id="section-general">
+        <h2 class="section-title" id="titleGeneral">GENERAL</h2>
+
+        <div class="form-row">
+          <label class="form-label" id="labelLanguage">Language</label>
+          <select id="languageSelect" class="form-input form-select">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+
+        <div class="form-row form-row--danger">
+          <div>
+            <div class="form-label" id="labelResetStats">Reset statistics</div>
+            <div class="form-hint" id="hintResetStats">This will erase your streak and session count.</div>
+          </div>
+          <button class="btn btn-danger" id="resetStatsBtn">RESET</button>
+        </div>
+      </section>
+
+      <!-- Save button -->
+      <div class="save-bar">
+        <button class="btn btn-accent btn-save" id="saveBtn">SAVE</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
